@@ -184,7 +184,6 @@ function themeSwitch(event) {
 
 This code first removes all children of the `ul` element with `data-dyndrop` attribute. Then it creates new `li` and `a` elements for each theme in the `themes` array and appends them to the `ul` element. It also adds a click event listener to each `a` element that triggers the `themeSwitch` function. You need to replace `// your code here` with the actual implementation of the `themeSwitch` function.
 
-```
 __Source__: Conversation with Bing, 20/04/2024
 (1) github.com. https://github.com/guifabrin/FinancasLaravel/tree/757aaffe27564ef33e0a3e2b79613b5171c128ab/app%2FHttp%2FControllers%2FController.php.
 
