@@ -1,0 +1,54 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Custum script
+        run: |
+          echo "updating package index"
+          apt-get update
+          echo "installing tree brotli zopfli"
+          apt-get install -y --no-install-recommends tree brotli zopfli
+          echo "getting tree -Dchanfix --timefmt '%F'"
+          tree -Dchanfix --timefmt '%F' | tee tree.txt
+          # find ./ -regextype posix-egrep -regex ".*\.(min\.css|html|js(on)?|pdf|xml|svg)$" -exec zopfli --i23 {} \; -exec brotli -q 11 -v {} \;
+          find ./ -regextype posix-egrep -regex ".*\.(css|html|js(on)?|pdf|xml|svg|map)$" | xargs -I {} -P$(nproc) bash -c '[[ ! -f $1.gz ]] && zopfli --i23 $1; [[ ! -f $1.br ]] && brotli -q 11 -v $1' _ {}
+          tree -Dchanfix --timefmt '%F' | tee tree2.txt
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
