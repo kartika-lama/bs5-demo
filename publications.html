@@ -4,8 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kartika Lama's CV</title>
-  <link href="./bootstrap.min.css" rel="stylesheet">
+  <title>World of Kartika Lamas</title>
+  <link data-theme="" href="./bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="64x64" href="./img/cactus-favicon.png">
 </head>
 
 <body>
@@ -28,15 +29,14 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Projects
+              BS-Themes
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Professional</a></li>
-              <li><a class="dropdown-item" href="#">Personal</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Cat pictures</a></li>
+            <ul class="dropdown-menu" data-dyndrop="js">
+              <div class="alert alert-warning" role="alert">
+                Warning: this only works with JavaScript enabled!<br>
+                This menu will be populated dynamically by the scripts.js file. <br>
+                And provide a means to test out the different [Bootswatch](https://bootswatch.com/) themes.
+              </div>
             </ul>
           </li>
           <li class="nav-item">
@@ -66,7 +66,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">A selection of influential publication by Kartika Lama</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Read them multiple times to fully appreciate the depths...</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Read them multiple times to fully appreciate their depths...</h6>
             <p class="card-text">
               <table class="table">
                 <thead>
@@ -136,7 +136,10 @@
   </div> <!-- .container -->
   </div>
   </div>
+
   <script src="./bootstrap.bundle.min.js"></script>
+  <script src="./scripts.js"></script>
+  
 </body>
 
 </html>
