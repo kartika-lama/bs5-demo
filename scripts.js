@@ -1,4 +1,5 @@
 const themes = [
+  "_default",
   "cerulean",
   "cosmo",
   "cyborg",
