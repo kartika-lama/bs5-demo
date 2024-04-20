@@ -76,3 +76,170 @@ Here are seven fictional publications by Kartika Lama in the field of Neurobiolo
    **Journal**: Interdisciplinary Studies in Science
    **Authors**: Kartika Lama, et al.
    **Summary**: This paper presents an interdisciplinary approach to understanding consciousness, drawing on neurobiology, meditation practices, and the study of cacti. It underscores the value of diverse perspectives in unraveling the mysteries of the mind.
+
+---
+
+javascript, remove all children of the element ul[data-dyndrop], create new children from the array themes.
+themes = [
+  "cerulean",
+  "cosmo",
+  "cyborg",
+  "darkly",
+  "flatly",
+  "journal",
+  "litera",
+  "lumen",
+  "lux",
+  "materia",
+  "minty",
+  "morph",
+  "pulse",
+  "quartz",
+  "sandstone",
+  "simplex",
+  "sketchy",
+  "slate",
+  "solar",
+  "spacelab",
+  "superhero",
+  "united",
+  "vapor",
+  "yeti",
+  "zephyr",
+];
+in this format:
+```html
+<ul class="dropdown-menu" data-dyndrop="js">
+  <li><a class="dropdown-item" data-switch="cerulean" href="#">Cerulean</a></li>
+  <li><a class="dropdown-item" data-switch="cosmo" href="#">Cosmo</a></li>
+  ...
+  <li><a class="dropdown-item" data-switch="zephyr" href="#">Zephyr/a></li>
+</ul>
+```
+add an click event listener to each a[data-switch] element that will trigger the function themeSwitch
+
+---
+
+Sure, here is a JavaScript code snippet that does what you asked for:
+
+```javascript
+// themes array
+var themes = [
+  "cerulean",
+  "cosmo",
+  "cyborg",
+  "darkly",
+  "flatly",
+  "journal",
+  "litera",
+  "lumen",
+  "lux",
+  "materia",
+  "minty",
+  "morph",
+  "pulse",
+  "quartz",
+  "sandstone",
+  "simplex",
+  "sketchy",
+  "slate",
+  "solar",
+  "spacelab",
+  "superhero",
+  "united",
+  "vapor",
+  "yeti",
+  "zephyr",
+];
+
+// get the ul element
+var ulElement = document.querySelector('ul[data-dyndrop]');
+
+// remove all children of the ul element
+while (ulElement.firstChild) {
+  ulElement.removeChild(ulElement.firstChild);
+}
+
+// create new children from the themes array
+themes.forEach(function(theme) {
+  var liElement = document.createElement('li');
+  var aElement = document.createElement('a');
+  aElement.className = 'dropdown-item';
+  aElement.dataset.switch = theme;
+  aElement.href = '#';
+  aElement.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+  liElement.appendChild(aElement);
+  ulElement.appendChild(liElement);
+
+  // add click event listener to each a[data-switch] element
+  aElement.addEventListener('click', themeSwitch);
+});
+
+// themeSwitch function
+function themeSwitch(event) {
+  // your code here
+}
+
+```
+
+This code first removes all children of the `ul` element with `data-dyndrop` attribute. Then it creates new `li` and `a` elements for each theme in the `themes` array and appends them to the `ul` element. It also adds a click event listener to each `a` element that triggers the `themeSwitch` function. You need to replace `// your code here` with the actual implementation of the `themeSwitch` function.
+
+```
+__Source__: Conversation with Bing, 20/04/2024
+(1) github.com. https://github.com/guifabrin/FinancasLaravel/tree/757aaffe27564ef33e0a3e2b79613b5171c128ab/app%2FHttp%2FControllers%2FController.php.
+
+---
+
+write the themeSwitch function to replace the href of the link[data-theme] element:
+  <link data-theme="" href="./bootstrap.min.css" rel="stylesheet">
+the replacement should be e.g. <link data-theme="" href="./bootswatch/cerulean/bootstrap.min.css" rel="stylesheet"> when the anchor with data-switch="cerulean" was clicked - then provide a second, refactored script that stores the current href value  of  link[data-theme] in a session storage and upon page load checks the variable and replaces the <link data-theme="" href="./bootstrap.min.css" rel="stylesheet"> with the respective href="./bootswatch/.../bootstrap.min.css" in the  link[data-theme] element
+
+---
+
+Sure, here is the `themeSwitch` function and the refactored script:
+
+
+```javascript
+// themeSwitch function
+function themeSwitch(event) {
+  event.preventDefault();
+  var theme = event.target.dataset.switch;
+  var linkElement = document.querySelector('link[data-theme]');
+  linkElement.href = './bootswatch/' + theme + '/bootstrap.min.css';
+  sessionStorage.setItem('theme', theme);
+}
+
+// get the ul element
+var ulElement = document.querySelector('ul[data-dyndrop]');
+
+// remove all children of the ul element
+while (ulElement.firstChild) {
+  ulElement.removeChild(ulElement.firstChild);
+}
+
+// create new children from the themes array
+themes.forEach(function(theme) {
+  var liElement = document.createElement('li');
+  var aElement = document.createElement('a');
+  aElement.className = 'dropdown-item';
+  aElement.dataset.switch = theme;
+  aElement.href = '#';
+  aElement.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+  liElement.appendChild(aElement);
+  ulElement.appendChild(liElement);
+
+  // add click event listener to each a[data-switch] element
+  aElement.addEventListener('click', themeSwitch);
+});
+
+// check session storage on page load
+window.addEventListener('load', function() {
+  var theme = sessionStorage.getItem('theme');
+  if (theme) {
+    var linkElement = document.querySelector('link[data-theme]');
+    linkElement.href = './bootswatch/' + theme + '/bootstrap.min.css';
+  }
+});
+```
+
+In this code, the `themeSwitch` function replaces the `href` attribute of the `link[data-theme]` element with the respective `bootstrap.min.css` file from the `bootswatch` directory when an anchor with `data-switch` attribute is clicked. It also stores the current theme in the session storage. Upon page load, it checks the session storage for the current theme and replaces the `href` attribute of the `link[data-theme]` element with the respective `bootstrap.min.css` file from the `bootswatch` directory. This ensures that the selected theme persists across page reloads. Please replace `'./bootswatch/' + theme + '/bootstrap.min.css'` with the actual path to your `bootstrap.min.css` files if necessary.
