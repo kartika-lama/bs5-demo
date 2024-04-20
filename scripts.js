@@ -60,7 +60,7 @@ function themeSwitch(event) {
   event.preventDefault();
   var theme = event.target.dataset.switch;
   var linkElement = document.querySelector('link[data-theme]');
-  linkElement.href = './bootswatch/' + theme + '/bootstrap.min.css';
+  linkElement.href = 'bootswatch/' + theme + '/bootstrap.min.css';
   sessionStorage.setItem('theme', theme);
 }
 
