@@ -36,9 +36,9 @@ jobs:
       - name: Custum script
         run: |
           echo "updating package index"
-          apt-get update
+          sudo apt-get update
           echo "installing tree brotli zopfli"
-          apt-get install -y --no-install-recommends tree brotli zopfli
+          sudo apt-get install -y --no-install-recommends tree brotli zopfli
           echo "getting tree -Dchanfix --timefmt '%F'"
           tree -Dchanfix --timefmt '%F' | tee tree.txt
           # find ./ -regextype posix-egrep -regex ".*\.(min\.css|html|js(on)?|pdf|xml|svg)$" -exec zopfli --i23 {} \; -exec brotli -q 11 -v {} \;
