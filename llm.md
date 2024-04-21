@@ -242,3 +242,60 @@ window.addEventListener('load', function() {
 ```
 
 In this code, the `themeSwitch` function replaces the `href` attribute of the `link[data-theme]` element with the respective `bootstrap.min.css` file from the `bootswatch` directory when an anchor with `data-switch` attribute is clicked. It also stores the current theme in the session storage. Upon page load, it checks the session storage for the current theme and replaces the `href` attribute of the `link[data-theme]` element with the respective `bootstrap.min.css` file from the `bootswatch` directory. This ensures that the selected theme persists across page reloads. Please replace `'./bootswatch/' + theme + '/bootstrap.min.css'` with the actual path to your `bootstrap.min.css` files if necessary.
+
+---
+
+javascript, get current url - particularly the page name, e.g. http://localhost:2020/publications.html -> publications.html 
+Loop through all li.nav-item > a.nav-link elements and find the one that contains e.g. href="./publications.html" add the class .active to that a.nav-link element
+
+---
+
+Sure, here is a JavaScript code snippet that does what you asked for:
+
+```javascript
+// Get the current URL
+let url = window.location.href;
+
+// Extract the page name from the URL
+let pageName = url.substring(url.lastIndexOf('/') + 1);
+
+// Select all 'a.nav-link' elements within 'li.nav-item' elements
+let navLinks = document.querySelectorAll('li.nav-item > a.nav-link');
+
+// Loop through all selected elements
+navLinks.forEach((navLink) => {
+    // Check if the href attribute of the navLink contains the pageName
+    if (navLink.getAttribute('href').includes(pageName)) {
+        // Add the 'active' class to the navLink
+        navLink.classList.add('active');
+    }
+});
+```
+
+This code first gets the current URL and extracts the page name. Then it selects all `a.nav-link` elements within `li.nav-item` elements and loops through them. If the `href` attribute of a link contains the page name, it adds the `active` class to that link. Please note that this code assumes that your website uses relative paths in the `href` attributes of the `a` elements. If your website uses absolute paths, you might need to adjust the code accordingly. Also, please make sure to run this code after the DOM has fully loaded, for example by placing it at the end of your HTML file or by using an event listener for the `DOMContentLoaded` event.
+
+---
+
+explain this js code and give references: `aElement.dataset.switch = theme;`
+
+---
+
+The line of JavaScript code you provided is using the `dataset` property to add a custom data attribute to an HTML element.
+
+```javascript
+aElement.dataset.switch = theme;
+```
+
+Here's a breakdown of what this code does:
+
+- `aElement`: This is a reference to an HTML element. It could be any element on the page, and it's assumed to have been defined earlier in the script.
+
+- `dataset`: The `dataset` property on an HTML element provides read/write access to all the custom data attributes (`data-*`) on the element. It's part of the HTML5 standard for embedding custom non-visible data in HTML elements.
+
+- `switch`: This is the name of the custom data attribute being accessed or set. In this case, it's `data-switch`. The `dataset` property automatically converts between the `data-*` attribute in the HTML and the JavaScript property by removing the `data-` prefix and converting the rest of the name from kebab-case to camelCase.
+
+- `theme`: This is the value being assigned to the `data-switch` attribute. It's assumed to be a variable that has been defined earlier in the script.
+
+So, this line of code is setting the value of the `data-switch` attribute on the `aElement` HTML element to whatever the value of `theme` is.
+
+For more information, you can refer to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) on using data attributes. Please note that the `dataset` property is not supported in Internet Explorer 10 and below. If you need to support these browsers, you may need to use `getAttribute` and `setAttribute` instead.
